@@ -51,8 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
             child: FlutterMentions(
               key: key,
               suggestionPosition: SuggestionPosition.Top,
-              maxLines: 5,
+              maxLines: 1,
               minLines: 1,
+              afterSubmitted: (controller) {
+                controller?.clear();
+              },
               decoration: InputDecoration(hintText: 'hello'),
               mentions: [
                 Mention(
