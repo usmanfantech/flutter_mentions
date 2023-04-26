@@ -25,6 +25,8 @@ class MyHomePage extends StatefulWidget {
 
   final String? title;
 
+  AnnotationEditingController _controller = AnnotationEditingController();
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -53,9 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               suggestionPosition: SuggestionPosition.Top,
               maxLines: 1,
               minLines: 1,
-              afterSubmitted: (controller) {
-                controller?.clear();
-              },
+              textController: widget._controller,
               decoration: InputDecoration(hintText: 'hello'),
               mentions: [
                 Mention(
