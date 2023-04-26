@@ -50,6 +50,7 @@ class FlutterMentions extends StatefulWidget {
     this.appendSpaceOnAdd = true,
     this.hideSuggestionList = false,
     this.onSuggestionVisibleChanged,
+    this.afterSubmitted,
   }) : super(key: key);
 
   final bool hideSuggestionList;
@@ -180,6 +181,7 @@ class FlutterMentions extends StatefulWidget {
 
   /// {@macro flutter.widgets.editableText.onSubmitted}
   final ValueChanged<String>? onSubmitted;
+  final Function(AnnotationEditingController? controller)? afterSubmitted;
 
   /// If false the text field is "disabled": it ignores taps and its
   /// [decoration] is rendered in grey.
@@ -473,7 +475,12 @@ class FlutterMentionsState extends State<FlutterMentions> {
                 expands: widget.expands,
                 onEditingComplete: widget.onEditingComplete,
                 onTap: widget.onTap,
-                onSubmitted: widget.onSubmitted,
+                onSubmitted: (value) {
+                  if (widget.onSubmitted != null) widget.onSubmitted!(value);
+                  if (widget.afterSubmitted != null) {
+                    widget.afterSubmitted!(controller);
+                  }
+                },
                 enabled: widget.enabled,
                 enableInteractiveSelection: widget.enableInteractiveSelection,
                 enableSuggestions: widget.enableSuggestions,
