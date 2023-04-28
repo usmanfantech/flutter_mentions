@@ -1,6 +1,6 @@
 part of flutter_mentions;
 
-enum SuggestionPosition { Top, Bottom }
+enum SuggestionPositionMention { Top, Bottom }
 
 class LengthMap {
   LengthMap({
@@ -14,8 +14,8 @@ class LengthMap {
   int end;
 }
 
-class Mention {
-  Mention({
+class Mentionable {
+  Mentionable({
     required this.trigger,
     this.data = const [],
     this.style,
@@ -49,7 +49,7 @@ class Mention {
 
   /// Allows to set custom markup for the mentioned item.
   final String Function(String trigger, String mention, String value)?
-  markupBuilder;
+      markupBuilder;
 }
 
 class Annotation {
@@ -68,5 +68,5 @@ class Annotation {
   String trigger;
   bool disableMarkup;
   final String Function(String trigger, String mention, String value)?
-  markupBuilder;
+      markupBuilder;
 }

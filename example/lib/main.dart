@@ -52,13 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             child: FlutterMentions(
               key: key,
-              suggestionPosition: SuggestionPosition.Top,
+              suggestionPosition: SuggestionPositionMention.Top,
               maxLines: 1,
               minLines: 1,
               textController: widget._controller,
               decoration: InputDecoration(hintText: 'hello'),
               mentions: [
-                Mention(
+                Mentionable(
                     trigger: '@',
                     style: TextStyle(
                       color: Colors.amber,
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       );
                     }),
-                Mention(
+                Mentionable(
                   trigger: '#',
                   disableMarkup: true,
                   style: TextStyle(

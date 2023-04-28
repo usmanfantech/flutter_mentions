@@ -5,7 +5,7 @@ class FlutterMentions extends StatefulWidget {
     required this.mentions,
     Key? key,
     this.defaultText,
-    this.suggestionPosition = SuggestionPosition.Bottom,
+    this.suggestionPosition = SuggestionPositionMention.Bottom,
     this.suggestionListHeight = 300.0,
     this.onMarkupChanged,
     this.onMentionAdd,
@@ -62,7 +62,7 @@ class FlutterMentions extends StatefulWidget {
   final Function(bool)? onSuggestionVisibleChanged;
 
   /// List of Mention that the user is allowed to triggered
-  final List<Mention> mentions;
+  final List<Mentionable> mentions;
 
   /// Leading widgets to show before teh Input box, helps preseve the size
   /// size for the Portal widget size.
@@ -74,8 +74,8 @@ class FlutterMentions extends StatefulWidget {
 
   /// Suggestion modal position, can be alligned to top or bottom.
   ///
-  /// Defaults to [SuggestionPosition.Bottom].
-  final SuggestionPosition suggestionPosition;
+  /// Defaults to [SuggestionPositionMention.Bottom].
+  final SuggestionPositionMention suggestionPosition;
 
   /// Triggers when the suggestion was added by tapping on suggestion.
   final Function(Map<String, dynamic>)? onMentionAdd;
@@ -296,7 +296,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
     return data;
   }
 
-  void addMention(Map<String, dynamic> value, [Mention? list]) {
+  void addMention(Map<String, dynamic> value, [Mentionable? list]) {
     final selectedMention = _selectedMention!;
 
     setState(() {
@@ -424,12 +424,14 @@ class FlutterMentionsState extends State<FlutterMentions> {
 
     return Container(
       child: PortalEntry(
-        portalAnchor: widget.suggestionPosition == SuggestionPosition.Bottom
-            ? Alignment.topCenter
-            : Alignment.bottomCenter,
-        childAnchor: widget.suggestionPosition == SuggestionPosition.Bottom
-            ? Alignment.bottomCenter
-            : Alignment.topCenter,
+        portalAnchor:
+            widget.suggestionPosition == SuggestionPositionMention.Bottom
+                ? Alignment.topCenter
+                : Alignment.bottomCenter,
+        childAnchor:
+            widget.suggestionPosition == SuggestionPositionMention.Bottom
+                ? Alignment.bottomCenter
+                : Alignment.topCenter,
         portal: ValueListenableBuilder(
           valueListenable: showSuggestions,
           builder: (BuildContext context, bool show, Widget? child) {
@@ -501,7 +503,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
     );
   }
 
-  Mention _getSelectedMentionFromList() {
+  Mentionable _getSelectedMentionFromList() {
     return _selectedMention != null
         ? widget.mentions.firstWhere((element) {
             var trigger = element.trigger;
