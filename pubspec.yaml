@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_portal: ^0.4.0
+  #flutter_portal: ^0.4.0
+  flutter_portal: ^1.1.1
 
 dev_dependencies:
   flutter_test:
